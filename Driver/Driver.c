@@ -10,7 +10,7 @@
 HINSTANCE hInst;                                // current instance
 WCHAR szTitle[MAX_LOADSTRING];                  // The title bar text
 WCHAR szWindowClass[MAX_LOADSTRING];            // the main window class name
-
+HWND hWnd;
 LPSTR szMessage = "This is a string of text";
 
 // Forward declarations of functions included in this code module:
@@ -47,11 +47,30 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     // Main message loop:
     while (GetMessage(&msg, 0, 0, 0))
     {
-        if (!TranslateAccelerator(msg.hwnd, hAccelTable, &msg))
-        {
-            TranslateMessage(&msg);
-            DispatchMessage(&msg);
-        }
+		if (!TranslateAccelerator(msg.hwnd, hAccelTable, &msg))
+		{
+			TranslateMessage(&msg);
+			DispatchMessage(&msg);
+		}
+
+		if (is_key_pressed(KeySpace))
+		{
+			szMessage = "ppppppppppppppppppppppppppppppppppppppppppp";
+			RedrawWindow(hWnd, 0, 0, RDW_INVALIDATE);
+		}
+
+		if (is_key_down(KeySpace))
+		{
+			szMessage = "Space is down";
+			RedrawWindow(hWnd, 0, 0, RDW_INVALIDATE);
+		}
+
+		if (is_key_released(KeySpace))
+		{
+			szMessage = "Space is released";
+			RedrawWindow(hWnd, 0, 0, RDW_INVALIDATE);
+		}
+
     }
 
     return (int) msg.wParam;
@@ -95,11 +114,13 @@ ATOM MyRegisterClass(HINSTANCE hInstance)
 //        In this function, we save the instance handle in a global variable and
 //        create and display the main program window.
 //
+
+
 BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 {
    hInst = hInstance; // Store instance handle in our global variable
 
-   HWND hWnd = CreateWindowW(szWindowClass, szTitle, WS_OVERLAPPEDWINDOW,
+   hWnd = CreateWindowW(szWindowClass, szTitle, WS_OVERLAPPEDWINDOW,
       CW_USEDEFAULT, 0, CW_USEDEFAULT, 0, 0, 0, hInstance, 0);
 
    if (!hWnd)
@@ -123,10 +144,31 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 //  WM_DESTROY  - post a quit message and return
 //
 //
+
+KeyCode newKey = KeyCount_;
+
 LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
+
+	keyboardStateClear();
+
     switch (message)
     {
+	case WM_KEYDOWN:
+	case WM_KEYUP:
+	{
+		u32 vk_code = (u32)wParam;
+		b32 was_down = ((lParam & (1 << 30)) != 0);
+		b32 is_down = ((lParam & (1 << 31)) == 0);
+		b32 alt_down = lParam & (1 << 29);
+
+		if (vk_code == VK_SPACE)
+		{
+			process_key(KeySpace, is_down);
+		}
+	}
+	break;
+
     case WM_COMMAND:
         {
             int wmId = LOWORD(wParam);
@@ -148,7 +190,6 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
         {
             PAINTSTRUCT ps;
             HDC hdc = BeginPaint(hWnd, &ps);
-            // TODO: Add any drawing code that uses hdc here...
 			TextOut(hdc, 70, 50, szMessage, strlen(szMessage));
             EndPaint(hWnd, &ps);
         }
@@ -169,7 +210,7 @@ INT_PTR CALLBACK About(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam)
     switch (message)
     {
     case WM_INITDIALOG:
-        return (INT_PTR)TRUE;
+		return (INT_PTR)TRUE;
 
     case WM_COMMAND:
         if (LOWORD(wParam) == IDOK || LOWORD(wParam) == IDCANCEL)
