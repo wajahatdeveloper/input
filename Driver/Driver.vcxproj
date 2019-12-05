@@ -94,13 +94,13 @@
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <CompileAs>CompileAsC</CompileAs>
-      <AdditionalIncludeDirectories>C:\Users\DELL\source\repos\input;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\DELL\source\repos\input\Driver\SDL2-2.0.10\include;C:\Users\DELL\source\repos\input;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>C:\Users\DELL\source\repos\input\Build;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>InputLibrary_Debug.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\Users\DELL\source\repos\input\Build;C:\Users\DELL\source\repos\input\Driver\SDL2-2.0.10\lib\x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>InputLibrary_Debug.lib;SDL2.lib;SDL2main.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <ProgramDatabaseFile>$(Configuration)$(TargetName).pdb</ProgramDatabaseFile>
       <ProfileGuidedDatabase>$(Configuration)$(TargetName).pgd</ProfileGuidedDatabase>
     </Link>
@@ -165,7 +165,10 @@
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Driver.c" />
+    <ClCompile Include="Driver_SDL.c" />
+    <ClCompile Include="Driver_Win32.c">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Driver.rc" />

@@ -71,6 +71,8 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 			RedrawWindow(hWnd, 0, 0, RDW_INVALIDATE);
 		}
 
+		keyboardStateClear();
+
     }
 
     return (int) msg.wParam;
@@ -149,8 +151,6 @@ KeyCode newKey = KeyCount_;
 
 LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
-
-	keyboardStateClear();
 
     switch (message)
     {

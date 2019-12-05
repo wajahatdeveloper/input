@@ -42,7 +42,10 @@
     </Image>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Driver.c">
+    <ClCompile Include="Driver_Win32.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Driver_SDL.c">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
