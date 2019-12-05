@@ -71,7 +71,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 			RedrawWindow(hWnd, 0, 0, RDW_INVALIDATE);
 		}
 
-		keyboardStateClear();
+		keyboard_state_clear();
 
     }
 

@@ -198,7 +198,7 @@ enum
 } typedef KeyCode;
 
 // Public Functions
-void keyboardStateClear();
+void keyboard_state_clear();
 void process_key(KeyCode key, b32 isDown);
 b32 is_key_pressed(KeyCode key);
 b32 is_key_released(KeyCode key);

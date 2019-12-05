@@ -10,6 +10,9 @@
     <Filter Include="Input">
       <UniqueIdentifier>{193057f1-10ee-42a7-a816-dd7a387176b1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Mouse">
+      <UniqueIdentifier>{8d772a2e-f710-46dc-b16a-6816f348495f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Keyboard.h">
@@ -17,6 +20,9 @@
     </ClInclude>
     <ClInclude Include="InputLibrary.h">
       <Filter>Input</Filter>
+    </ClInclude>
+    <ClInclude Include="Mouse.h">
+      <Filter>Mouse</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -31,6 +37,9 @@
     </ClCompile>
     <ClCompile Include="InputLibrary.c">
       <Filter>Input</Filter>
+    </ClCompile>
+    <ClCompile Include="Mouse.c">
+      <Filter>Mouse</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

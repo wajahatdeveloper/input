@@ -2,7 +2,7 @@
 
 KeyboardInput keyboardInput = { 0 };
 
-void keyboardStateClear()
+void keyboard_state_clear()
 {
 	for (int i = 0; i < KeyCount_; i++)
 		keyboardInput.keys[i].changed = false;

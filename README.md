@@ -22,7 +22,7 @@ void process_key(KeyCode key, b32 isDown);  // updates the internal keyboard sta
 ```
 
 ```c
-void keyboardStateClear();                  // clears the internal keyboard state for all keys.   
+void keyboard_state_clear();                  // clears the internal keyboard state for all keys.   
     
 // this function should be called at the begining of every logical frame.   
 ```

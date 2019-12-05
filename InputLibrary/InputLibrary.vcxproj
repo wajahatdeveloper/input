@@ -157,12 +157,14 @@
   <ItemGroup>
     <ClInclude Include="InputLibrary.h" />
     <ClInclude Include="Keyboard.h" />
+    <ClInclude Include="Mouse.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Common.c" />
     <ClCompile Include="Common.h" />
     <ClCompile Include="InputLibrary.c" />
     <ClCompile Include="Keyboard.c" />
+    <ClCompile Include="Mouse.c" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

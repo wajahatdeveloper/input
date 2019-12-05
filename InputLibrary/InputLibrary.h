@@ -34,3 +34,4 @@
 //#endif
 
 #include "Keyboard.h"
+#include "Mouse.h"
