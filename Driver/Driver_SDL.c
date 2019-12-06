@@ -60,13 +60,8 @@ int main(int argc, char* argv[])
 					break;
 				}
 			}
-			else if (/*e.type == SDL_MOUSEMOTION || e.type == SDL_MOUSEBUTTONDOWN ||*/ e.type == SDL_MOUSEBUTTONUP)
+			else if ( e.type == SDL_MOUSEBUTTONDOWN || e.type == SDL_MOUSEBUTTONUP)
 			{
-				// get mouse position
-				int x, y;
-				SDL_GetMouseState(&x, &y);
-				process_mouse_position(x, y);
-
 				b32 isDown = (e.type == SDL_MOUSEBUTTONDOWN)?1:0;
 
 				// get mouse button left
@@ -75,19 +70,29 @@ int main(int argc, char* argv[])
 					process_mouse_button(MouseButton0, isDown);
 				}
 				// get mouse button middle
-				if (SDL_GetMouseState(NULL, NULL) & SDL_BUTTON_MMASK)
+				if (e.button.button == SDL_BUTTON_MIDDLE)
 				{
 					process_mouse_button(MouseButton1, isDown);
 				}
 				// get mouse button right
-				if (SDL_GetMouseState(NULL, NULL) & SDL_BUTTON_RMASK)
+				if (e.button.button == SDL_BUTTON_RIGHT)
 				{
 					process_mouse_button(MouseButton2, isDown);
 				}
-				// get mouse delta
-				process_mouse_motion(e.motion.xrel, e.motion.yrel);
+				
+				
+			}
+			else if (e.type == SDL_MOUSEWHEEL)
+			{
 				// get mouse wheel offset
 				process_mouse_wheel(e.wheel.y);
+			}
+			else if (e.type == SDL_MOUSEMOTION)
+			{
+				// get mouse position
+				int x, y;
+				SDL_GetMouseState(&x, &y);
+				process_mouse_position(x, y);
 			}
 		}
 
@@ -111,19 +116,22 @@ int main(int argc, char* argv[])
 			rect.x = 100;
 			rect.y = 100;
 		}*/
-		/*if (is_button_pressed(MouseButton0))
+		if (is_button_pressed(MouseButton2))
 		{
 			rect.x = 100;
 		}
-		if (is_button_down(MouseButton0))
+		if (is_button_down(MouseButton2))
 		{
 			rect.y = 100;
-		}*/
-		if (is_button_released(MouseButton0))
+		}
+		if (is_button_released(MouseButton2))
 		{
 			rect.x = 100;
 			rect.y = 100;
 		}
+		/*rect.x = get_mouse_position_x();
+		rect.y = get_mouse_position_y();
+		rect.h += get_mouse_wheel_offset();*/
 		SDL_SetRenderDrawColor(mRenderer, 255, 0, 0, 255);
 		SDL_RenderDrawRect(mRenderer, &rect);
 		SDL_RenderPresent(mRenderer);

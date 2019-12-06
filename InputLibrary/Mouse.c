@@ -20,12 +20,6 @@ void process_mouse_position(int xPosition, int yPosition)
 	mouseInput.y_position = yPosition;
 }
 
-void process_mouse_motion(int xDelta, int yDelta)
-{
-	mouseInput.x_delta = xDelta;
-	mouseInput.y_delta = yDelta;
-}
-
 void process_mouse_wheel(int offset)
 {
 	mouseInput.wheel_offset = offset;
@@ -53,4 +47,19 @@ b32 is_button_down(MouseButton button)
 		return true;
 	else
 		return false;
+}
+
+int get_mouse_wheel_offset()
+{
+	return mouseInput.wheel_offset;
+}
+
+int get_mouse_position_x()
+{
+	return mouseInput.x_position;
+}
+
+int get_mouse_position_y()
+{
+	return mouseInput.y_position;
 }

@@ -17,11 +17,13 @@ enum
 void mouse_state_clear();
 void process_mouse_button(MouseButton button, b32 isDown);
 void process_mouse_position(int xPosition, int yPosition);
-void process_mouse_motion(f32 xDelta, f32 yDelta);
-void process_mouse_wheel(f32 offset);
+void process_mouse_wheel(int offset);
 b32 is_button_pressed(MouseButton button);
 b32 is_button_released(MouseButton button);
 b32 is_button_down(MouseButton button);
+int get_mouse_wheel_offset();
+int get_mouse_position_x();
+int get_mouse_position_y();
 
 // Private Fields
 struct
@@ -33,8 +35,6 @@ struct
 {
 	int x_position;
 	int y_position;
-	int x_delta;
-	int y_delta;
 	int wheel_offset;
 	MouseButtonState buttons[MouseButtonCount_];
 } typedef MouseInput;
